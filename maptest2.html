@@ -42,6 +42,7 @@ Promise.all([worldmap]).then(function(values){
 		{
 			curVal = "continent";
 		}
+	    	d3.select(this).attr("class", curVal);
     		});
     });
 
