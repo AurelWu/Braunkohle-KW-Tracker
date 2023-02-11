@@ -9,7 +9,7 @@
 </head>	
 <body>
     <button onclick="resetAll()">Reset Selection!</button>
-    <p id="TestText">TestText</p>
+    <p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
     var w = 1200;
@@ -46,6 +46,9 @@ Promise.all([worldmap]).then(function(values){
 		}
 	    	d3.select(this).attr("class", curVal);
     		});
+	.on("hover", function() {
+		document.getElementById("p1").innerHTML = "New text!";
+		});
     });
 
 function resetAll()
