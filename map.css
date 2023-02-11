@@ -1,10 +1,10 @@
-.continent {
+.region {
 	fill : #FFFFFF;
 	stroke: #e0cabc;
 	stroke-width: 0.5;
 }
 
-.continent:hover {
+.region:hover {
 	fill : #1c1a1a;
 	stroke: #e0cabc;
 	stroke-width: 0.5;
