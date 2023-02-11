@@ -19,7 +19,7 @@
     var path = d3.geoPath().projection(projection);
 
   // load data  
-var worldmap = d3.json("countries.geojson");
+var worldmap = d3.json("landkreise_simplify200.geojson");
 //var cities = d3.csv("cities.csv");
 
 Promise.all([worldmap]).then(function(values){    
