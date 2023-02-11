@@ -31,3 +31,8 @@
 	font-size: 11px;
 	fill: #3c373d;
 }
+
+#container {
+	height: 600;
+	width: 1200;
+}
