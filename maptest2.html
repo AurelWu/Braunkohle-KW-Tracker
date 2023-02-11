@@ -12,8 +12,8 @@
     <p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
-    var w = 1200;
-    var h = 600;
+    var w = 1100;
+    var h = 550;
     var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet").style("background-color","#c9e8fd")
     .attr("viewBox", "0 0 " + w + " " + h)
     .classed("svg-content", true);
@@ -31,12 +31,10 @@ Promise.all([worldmap]).then(function(values){
         .enter()
         .append("path")
         .attr("class","continent")
-	//.attr("data", (dat) => dat.properties.name)
 	.attr("name", function (d) {
         return d.properties["GEN"];
     	})
         .attr("d", path)
-	//.style("fill", "#FFFFFF")
 	.on("click", function() {
         	//d3.select(this).attr("class", "clicked");
 		let curVal = d3.select(this).attr("class");
