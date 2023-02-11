@@ -8,30 +8,64 @@
 <style></style>
 </head>
 <body>
-    <div id="container" class="svg-container"></div>
+
     <script type="text/javascript">
-    var w = 1200;
-    var h = 600;
-    var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet").style("background-color","#c9e8fd")
-    .attr("viewBox", "0 0 " + w + " " + h)
-    .classed("svg-content", true);
-    var projection = d3.geoMercator().translate([w/2, h/2]).scale(2650).center([10,51.4]);
-    var path = d3.geoPath().projection(projection);
+    
+    let w = 1200;
+    let h = 600;
+        
+    <div id="container">
+        <div class="info">Hover over a country</div>
+        <svg width= "1200px" height= "600px">
+            <g class="map"></g>
+            <g class="bounding-box"><rect></rect></g>
+            <g class="centroid"><circle r="4"></circle></g>
+        </svg>
+    </div>    
+    
+    let projection = d3.geoMercator()
+	.scale(2700)
+	.translate([w/2, h/2])
+	.center([10, 51.5]);
+        
+    function handleMouseover(e, d) 
+    {
+	    let pixelArea = geoGenerator.area(d);
+	    let bounds = geoGenerator.bounds(d);
+	    let centroid = geoGenerator.centroid(d);
+	    let measure = geoGenerator.measure(d);
 
-  // load data  
-var worldmap = d3.json("landkreise_simplify200.geojson");
-//var cities = d3.csv("cities.csv");
+	    d3.select('#content .info')
+		    .text(d.properties.name + ' (path.area = ' + pixelArea.toFixed(1) + ' path.measure = ' + measure.toFixed(1) + ')');
 
-Promise.all([worldmap]).then(function(values){    
- // draw map
-    svg.selectAll("path")
-        .data(values[0].features)
-        .enter()
-        .append("path")
-        .attr("class","continent")
-        .attr("d", path);
-    });
+	    d3.select('#content .bounding-box rect')
+		    .attr('x', bounds[0][0])
+		    .attr('y', bounds[0][1])
+		    .attr('width', bounds[1][0] - bounds[0][0])
+		    .attr('height', bounds[1][1] - bounds[0][1]);
 
-</script>
+	    d3.select('#content .centroid')
+		    .style('display', 'inline')
+		    .attr('transform', 'translate(' + centroid + ')');
+    }  
+    
+    function update(geojson) 
+    {
+    	let u = d3.select('#content g.map')
+	    	.selectAll('path')
+		    .data(geojson.features);
+
+	    u.enter()
+		    .append('path')
+		    .attr('d', geoGenerator)
+		    .on('mouseover', handleMouseover);
+    }
+    
+    d3.json("landkreise_simplify200.geojson")
+	.then(function(json) {
+		update(json)
+	});
+      
+    </script>    
 </body>
 </html>
