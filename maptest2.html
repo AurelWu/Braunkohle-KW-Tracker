@@ -32,7 +32,16 @@ Promise.all([worldmap]).then(function(values){
         .attr("d", path)
 	//.style("fill", "#FFFFFF")
 	.on("click", function() {
-        	d3.select(this).attr("class", "clicked");
+        	//d3.select(this).attr("class", "clicked");
+		let curVal = d3.select(this).attr("class");
+	    	if(curVal !== "clicked") 
+		{
+			curVal = "clicked";
+		}
+	    	else
+		{
+			curVal = "continent";
+		}
     		});
     });
 
