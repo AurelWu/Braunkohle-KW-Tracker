@@ -30,21 +30,21 @@ Promise.all([worldmap]).then(function(values){
         .data(values[0].features)
         .enter()
         .append("path")
-        .attr("class","continent")
+        .attr("class","region")
+	.attr("status", "normal")
 	.attr("name", function (d) {
         return d.properties["GEN"];
     	})
         .attr("d", path)
-	.on("click", function() {
-        	//d3.select(this).attr("class", "clicked");
-		let curVal = d3.select(this).attr("class");
+	.on("click", function() {        	
+		let curVal = d3.select(this).attr("status");
 	    	if(curVal !== "clicked") 
 		{
 			curVal = "clicked";
 		}
 	    	else
 		{
-			curVal = "continent";
+			curVal = "normal";
 		}
 	    	d3.select(this).attr("class", curVal);
     		})
@@ -58,7 +58,7 @@ Promise.all([worldmap]).then(function(values){
 function resetAll()
 {
 	svg.selectAll("path")
-	.attr("class", "continent");
+	.attr("status", "normal");
 	d3.select("#p1").html("TestText");
 };
 	    
