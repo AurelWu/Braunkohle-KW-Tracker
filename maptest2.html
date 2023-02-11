@@ -32,7 +32,7 @@ Promise.all([worldmap]).then(function(values){
         .append("path")
         .attr("class","continent")
 	//.attr("data", (dat) => dat.properties.name)
-	.attr("data", function (d) {
+	.attr("name", function (d) {
         return d.properties["GEN"];
     	})
         .attr("d", path)
@@ -51,9 +51,9 @@ Promise.all([worldmap]).then(function(values){
 	    	d3.select(this).attr("class", curVal);
     		})
 	.on("mouseover", function() {
-	    	//let regionInfo = values[0].features["properties"]["ADE"];
+	    	let regionInfo = d3.select(this).attr("name")
 		d3.select("#p1").style("color", "green");
-	    	//d3.select("#p1").html(regionInfo);
+	    	d3.select("#p1").html(regionInfo);
 		});
     });
 
@@ -61,6 +61,7 @@ function resetAll()
 {
 	svg.selectAll("path")
 	.attr("class", "continent");
+	d3.select("#p1").html("TestText");
 };
 	    
 </script>
