@@ -31,7 +31,7 @@ Promise.all([worldmap]).then(function(values){
         .attr("class","continent")
         .attr("d", path)
 	.on("click", function() {
-		d3.select(this).style("fill", rectColor)
+		d3.select(this).style("fill", "#FFFFF")
     	});
 
     });
