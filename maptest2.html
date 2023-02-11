@@ -30,7 +30,7 @@ Promise.all([worldmap]).then(function(values){
         .append("path")
         .attr("class","continent")
         .attr("d", path)
-	.style("fill", "#FFFFFF")
+	//.style("fill", "#FFFFFF")
 	.on("click", function() {
         	d3.select(this).attr("class", "clicked");
     		});
