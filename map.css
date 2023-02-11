@@ -1,4 +1,12 @@
 .continent {
+	fill : #FFFFFF;
+	stroke: #e0cabc;
+	stroke-width: 0.5;
+}
+
+.clicked
+{
+	fill : #F00000;
 	stroke: #e0cabc;
 	stroke-width: 0.5;
 }
