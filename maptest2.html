@@ -47,8 +47,9 @@ Promise.all([worldmap]).then(function(values){
 	    	d3.select(this).attr("class", curVal);
     		})
 	.on("mouseover", function() {
+	    	let regionInfo = d3.select(this).attr("GEN");
 		d3.select("#p1").style("color", "green");
-	    	d3.select("#p1").html("newTest");
+	    	d3.select("#p1").html(regionInfo);
 		});
     });
 
