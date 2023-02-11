@@ -32,7 +32,7 @@ Promise.all([worldmap]).then(function(values){
         .attr("d", path)
 	.style("fill", "#FFFFFF")
 	.on("click", function() {
-        	d3.select(this).attr("width", 120);
+        	d3.select(this).attr("class", "clicked");
     		});
     });
 
