@@ -7,9 +7,21 @@
 </head>
 <body>
 <p id= "p1">Layout Test String</p>
-
+<div id="container" class="svg-container"></div>
 <script>
     d3.select("#p1").style("color", "green");
+    
+    var w = 1400;
+    var h = 700;
+    var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet").style("background-color","#c9e8fd")
+    .attr("viewBox", "0 0 " + w + " " + h)
+    .classed("svg-content", true);
+    var projection = d3.geoMercator().translate([w/2, h/2]).scale(2200).center([0,40]);
+    var path = d3.geoPath().projection(projection);
+    
+    var worldmap = d3.json("landkreise_simplify200.geojson");
+    
+    
 </script>
 
 </body>
