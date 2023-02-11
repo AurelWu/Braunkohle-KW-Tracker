@@ -8,7 +8,7 @@
 <style></style>
 </head>	
 <body>
-    <button type="button">Reset Selection!</button>
+    <button onclick="resetAll()">Reset Selection!</button>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
     var w = 1200;
@@ -47,6 +47,12 @@ Promise.all([worldmap]).then(function(values){
     		});
     });
 
+function resetAll()
+{
+	svg.selectAll("path")
+	.attr("class", "continent");
+};
+	    
 </script>
 </body>
 </html>
