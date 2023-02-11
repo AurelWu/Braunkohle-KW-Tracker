@@ -19,7 +19,19 @@
     var projection = d3.geoMercator().translate([w/2, h/2]).scale(2200).center([0,40]);
     var path = d3.geoPath().projection(projection);
     
-    var worldmap = d3.json("landkreise_simplify200.geojson");
+    var mapGermany = d3.json("landkreise_simplify200.geojson");
+    
+    Promise.all([mapGermany]).then(function(values){    
+ // draw map
+    svg.selectAll("path")
+        .data(values[0].features)
+        .enter()
+        .append("path")
+        .attr("class","continent")
+        .attr("d", path),
+ 
+    });
+
     
     
 </script>
