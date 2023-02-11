@@ -10,12 +10,12 @@
 <body>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
-    var w = 1400;
-    var h = 700;
+    var w = 1200;
+    var h = 600;
     var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet").style("background-color","#c9e8fd")
     .attr("viewBox", "0 0 " + w + " " + h)
     .classed("svg-content", true);
-    var projection = d3.geoMercator().translate([w/2, h/2]).scale(1200).center([10,50]);
+    var projection = d3.geoMercator().translate([w/2, h/2]).scale(2700).center([10,50]);
     var path = d3.geoPath().projection(projection);
 
   // load data  
