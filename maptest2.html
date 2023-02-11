@@ -29,10 +29,11 @@ Promise.all([worldmap]).then(function(values){
         .enter()
         .append("path")
         .attr("class","continent")
-        .attr("d", path); 
-        //.on("click", (function(g) {
-	//	d3.select(this).attr("fill", #F00000);
-	//});
+        .attr("d", path)
+	.text(function(d) {
+                    return "test";
+               });
+
     });
 
 </script>
