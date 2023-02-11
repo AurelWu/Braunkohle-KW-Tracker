@@ -11,7 +11,13 @@
 }
 
 .clicked {
-	fill : #734040;
+	fill : #db1d56;
+	stroke: #e0cabc;
+	stroke-width: 0.75;
+}
+
+.clicked:hover {
+	fill : #3c373d;
 	stroke: #e0cabc;
 	stroke-width: 0.75;
 }
