@@ -51,7 +51,7 @@
     
     function update(geojson) 
     {
-    	let u = d3.select('#content g.map')
+    	let u = d3.select('#container g.map')
 	    	.selectAll('path')
 		    .data(geojson.features);
 
