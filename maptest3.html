@@ -35,16 +35,16 @@
 	    let centroid = geoGenerator.centroid(d);
 	    let measure = geoGenerator.measure(d);
 
-	    d3.select('#content .info')
+	    d3.select('#container .info')
 		    .text(d.properties.name + ' (path.area = ' + pixelArea.toFixed(1) + ' path.measure = ' + measure.toFixed(1) + ')');
 
-	    d3.select('#content .bounding-box rect')
+	    d3.select('#container .bounding-box rect')
 		    .attr('x', bounds[0][0])
 		    .attr('y', bounds[0][1])
 		    .attr('width', bounds[1][0] - bounds[0][0])
 		    .attr('height', bounds[1][1] - bounds[0][1]);
 
-	    d3.select('#content .centroid')
+	    d3.select('#container .centroid')
 		    .style('display', 'inline')
 		    .attr('transform', 'translate(' + centroid + ')');
     }  
