@@ -47,7 +47,7 @@ Promise.all([worldmap]).then(function(values){
 	    	d3.select(this).attr("class", curVal);
     		})
 	.on("hover", function() {
-		document.getElementById("p1").innerHTML = "New text!";
+		d3.select("#p2").style("color", "green");
 		});
     });
 
