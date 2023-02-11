@@ -46,7 +46,7 @@ Promise.all([worldmap]).then(function(values){
 		{
 			curVal = "normal";
 		}
-	    	d3.select(this).attr("class", curVal);
+	    	d3.select(this).attr("status", curVal);
     		})
 	.on("mouseover", function() {
 	    	let regionInfo = d3.select(this).attr("name")
