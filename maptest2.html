@@ -31,7 +31,8 @@ Promise.all([worldmap]).then(function(values){
         .enter()
         .append("path")
         .attr("class","continent")
-	.attr("data", (d) => d.properties.name)
+	//.attr("data", (dat) => dat.properties.name)
+	.attr("data", "test")
         .attr("d", path)
 	//.style("fill", "#FFFFFF")
 	.on("click", function() {
