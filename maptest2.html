@@ -25,6 +25,7 @@
   // load data  
 var worldmap = d3.json("landkreise_simplify200.geojson");
 var testData = d3.csv("test.csv");
+var pathDict = {};	    
 
 //var cities = d3.csv("cities.csv");
 
@@ -41,6 +42,7 @@ Promise.all([worldmap]).then(function(values){
         	return d.properties["GEN"];
     	})
 	.attr("AGS", function (d) {
+	    	pathDict[d.properties["AGS"]] = d3.select(this);
         	return d.properties["AGS"];
     	})
 	.attr("population", function (d) {
