@@ -60,7 +60,7 @@ Promise.all([worldmap]).then(function(values){
 	    	let friendlyName = d3.select(this).attr("name");
 		let AGS = d3.select(this).attr("AGS");
 	    	let pop = d3.select(this).attr("population");
-		let regionInfo = friendlyName + "| " + AGS + "| " + pop!;
+		let regionInfo = friendlyName + "| " + AGS + "| " + pop;
 	    	
 		d3.select("#p1").style("color", "green");
 	    	d3.select("#p1").html(regionInfo);
