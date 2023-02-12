@@ -74,7 +74,8 @@ function resetAll()
 {
 	svg.selectAll("path")
 	.attr("status", "normal");
-	.attr("category", "-1");
+	//.attr("category", "-1");
+	.removeAttribute("category");
 	d3.select("#p1").html("TestText");
 };
 	    
