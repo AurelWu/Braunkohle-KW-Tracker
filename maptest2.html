@@ -24,14 +24,16 @@
 
   // load data  
 var worldmap = d3.json("landkreise_simplify200.geojson");
-let testData = d3.csv("test.csv").then(function(data)
-    {return data;
+var parsedCSV = null;
+var inputCSV = d3.csv("test.csv").then(function(data)
+    {parsedCSV = data;
     });
 
+	    
 var pathDict = {};	    
 
 //var cities = d3.csv("cities.csv");
-
+	    	    
 Promise.all([worldmap]).then(function(values){    
  // draw map
     svg.selectAll("path")
@@ -50,7 +52,7 @@ Promise.all([worldmap]).then(function(values){
     	})
 	.attr("COVID", function (d) {
 	    	
-        	return testData[d.properties["AGS"]].COVID;
+        	return parsedCSV[d.properties["AGS"]].COVID;
     	})
 	
 	.attr("population", function (d) {
