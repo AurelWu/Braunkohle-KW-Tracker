@@ -29,23 +29,25 @@ var parsedCSV = null;
 var dictCSV = {};	    
 var inputCSV = d3.dsv(";","test.csv");
 	   
-Promise.resolve(inputCSV).then(function(v)
-{	
-	console.log(v);
-	for (var k in v) 
-	{
-  		console.log(v[k]);
-		dictCSV[v[k].AGS] = v[k].COVID;
-	}	
-});
+//Promise.resolve(inputCSV).then(function(v)
+//{	
+//	console.log(v);
+//	for (var k in v) 
+//	{
+//  		console.log(v[k]);
+//		dictCSV[v[k].AGS] = v[k].COVID;
+//	}	
+//});
 	    
 var pathDict = {};	    
 
 //var cities = d3.csv("cities.csv");
 	    	    
-Promise.all([worldmap]).then(function(values){    
+Promise.all([worldmap,inputCSV]).then(function(values){    
+    parsedCSV = values[1];	
  // draw map
-		
+    
+	
     svg.selectAll("path")
         .data(values[0].features)
         .enter()
