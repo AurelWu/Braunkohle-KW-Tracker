@@ -34,6 +34,7 @@ Promise.all([worldmap]).then(function(values){
         .append("path")
         .attr("class","region")
 	.attr("status", "normal")
+	.attr("category, "-1");
 	.attr("name", function (d) {
         	return d.properties["GEN"];
     	})
@@ -60,7 +61,8 @@ Promise.all([worldmap]).then(function(values){
 	    	let friendlyName = d3.select(this).attr("name");
 		let AGS = d3.select(this).attr("AGS");
 	    	let pop = d3.select(this).attr("population");
-		let regionInfo = friendlyName + "| " + AGS + "| " + pop;
+		let cat = d3.select(this).attr("category");
+		let regionInfo = friendlyName + "| " + AGS + "| " + pop + "| " + category ;
 	    	
 		d3.select("#p1").style("color", "green");
 	    	d3.select("#p1").html(regionInfo);
