@@ -59,12 +59,9 @@ Promise.all([worldmap]).then(function(values){
 	    	pathDict[d.properties["AGS"]] = d3.select(this);
         	return d.properties["AGS"];
     	})
-	.attr("COVID", function (d) {
-	    	
-	    	let k = dictCSV[d.properties["AGS"]];
-        	//return k;
-    	})
-	
+	.attr("COVID", function (d) {	    	
+	    	return dictCSV[d.properties["AGS"]];        	
+    	})	
 	.attr("population", function (d) {
         	return d.properties["destatis"]["population"];
     	})
