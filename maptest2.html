@@ -29,7 +29,8 @@ var dictCSV = {};
 var inputCSV = d3.csv("test.csv").then(function(data)
     { parsedCSV = data;    
     });
-	    	    
+
+Promise.resolve(inputCSV);	    
 var pathDict = {};	    
 
 //var cities = d3.csv("cities.csv");
