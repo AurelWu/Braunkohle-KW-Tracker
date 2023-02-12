@@ -33,7 +33,7 @@ Promise.resolve(inputCSV).then(function(v)
 	console.log(v);
 	for (var k in v) 
 	{
-  		console.log(k);
+  		console.log(v[k]);
 		dictCSV[v[k].AGS] = v[k].COVID;
 	}	
 });
