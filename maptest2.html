@@ -47,7 +47,7 @@ Promise.all([worldmap]).then(function(values){
     	})
 	.attr("COVID", function (d) {
 	    	
-        	return testData[d.properties["AGS"]];
+        	return testData[d.properties["AGS"]].COVID;
     	})
 	
 	.attr("population", function (d) {
