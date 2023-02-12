@@ -30,6 +30,8 @@ var inputCSV = d3.csv("test.csv").then(function(data)
     { parsedCSV = data;    
     });
 
+console.log(parsedCSV);	    
+	    
 for (var n of parsedCSV) {	
   console.log(n);
   let k = n.AGS;
