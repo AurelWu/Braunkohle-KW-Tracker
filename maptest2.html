@@ -28,7 +28,9 @@ var parsedCSV = null;
 var dictCSV = {};	    
 var inputCSV = d3.csv("test.csv");
 	   
-Promise.resolve(inputCSV).then(function(v){
+Promise.resolve(inputCSV).then(function(v)
+{	
+	console.log(v);
 	dictCSV[v.AGS] = v.COVID;
 });
 	    
@@ -38,15 +40,7 @@ var pathDict = {};
 	    	    
 Promise.all([worldmap]).then(function(values){    
  // draw map
-	
-	for (var element of parsedCSV) 
-	{
-		dictCSV[element.AGS] = element.COVID;
-  		console.log(element);
-		console.log(element.AGS);
-		console.log(element.COVID);
-	}	
-	
+		
     svg.selectAll("path")
         .data(values[0].features)
         .enter()
