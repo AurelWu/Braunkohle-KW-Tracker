@@ -36,6 +36,9 @@ Promise.all([worldmap]).then(function(values){
 	.attr("name", function (d) {
         return d.properties["GEN"];
     	})
+	.attr("AGS, function (d) {
+        return d.properties["AGS"];
+    	})
         .attr("d", path)
 	.on("click", function() {        	
 		let curVal = d3.select(this).attr("status");
@@ -50,7 +53,9 @@ Promise.all([worldmap]).then(function(values){
 	    	d3.select(this).attr("status", curVal);
     		})
 	.on("mouseover", function() {
-	    	let regionInfo = d3.select(this).attr("name")
+	    	let friendlyName = d3.select(this).attr("name");
+		let AGS = d3.select(this).attr("AGS");
+		let regionInfo = friendlyName + " " + AGS;
 		d3.select("#p1").style("color", "green");
 	    	d3.select("#p1").html(regionInfo);
 		});
