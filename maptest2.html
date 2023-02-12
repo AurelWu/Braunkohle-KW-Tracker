@@ -79,10 +79,22 @@ function ShowPopulation()
 	.attr("category", function() {
 		let p = d3.select(this).attr("population");
 		let c = 1;
-		if(p > 100000) c = 2;
-		else if( p > 200000) c = 3;
-		else if( p > 300000) c = 4;
-		else c = 5;
+		if(p > 100000)
+		{
+			c = 2;
+		}
+		else if( p > 200000)
+		{
+			c = 3;
+		}
+		else if( p > 300000)
+		{
+			c = 4;
+		}
+		else 
+		{
+			c = 5;
+		}
 		return c;
 	});
 }
