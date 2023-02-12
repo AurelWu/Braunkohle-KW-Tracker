@@ -34,7 +34,7 @@ Promise.all([worldmap]).then(function(values){
         .append("path")
         .attr("class","region")
 	.attr("status", "normal")
-	.attr("category, "-1")
+	.attr("category", "-1")
 	.attr("name", function (d) {
         	return d.properties["GEN"];
     	})
