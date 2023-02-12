@@ -41,7 +41,7 @@ Promise.all([worldmap]).then(function(values){
         	return d.properties["AGS"];
     	})
 	.attr("population", function (d) {
-        	return d.properties["destatis.population"];
+        	return d.properties["destatis"]["population"];
     	})
         .attr("d", path)
 	.on("click", function() {        	
