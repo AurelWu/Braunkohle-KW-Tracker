@@ -8,7 +8,8 @@
 <style></style>
 </head>	
 <body>
-    <button onclick="resetAll()">Reset Selection!</button>
+    <button onclick="resetAll()">Reset Selection</button>
+    <button onclick="AssignRandomValues()">Assign Random Values</button>
     <p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
@@ -55,6 +56,18 @@ Promise.all([worldmap]).then(function(values){
 		});
     });
 
+function AssignRandomValues()
+{
+	let rnd = getRndIntegerIncl(1,5);
+	svg.selectAll("path")
+	.attr("category", rnd);
+};
+	    
+function getRndIntegerIncl(min, max) 
+{
+	return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+	    
 function resetAll()
 {
 	svg.selectAll("path")
