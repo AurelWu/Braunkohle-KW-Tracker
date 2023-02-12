@@ -39,6 +39,7 @@ Promise.all([worldmap]).then(function(values){
 	
 	for (var element of parsedCSV) 
 	{
+		dictCSV[element.AGS] = element.COVID;
   		console.log(element);
 	}	
 	
