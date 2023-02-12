@@ -11,6 +11,7 @@
     <button onclick="resetAll()">Reset Selection</button>
     <button onclick="AssignRandomValues()">Assign Random Values</button>
     <button onclick="ShowPopulation()">show Population</button>
+    <button onclick="ShowCovid()">show Covid ITS</button>
     <p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
@@ -124,6 +125,32 @@ function ShowPopulation()
 		return c;
 	});
 }
+	    
+function ShowCovid()
+{	
+	svg.selectAll("path")
+	.attr("category", function() {
+		let p = d3.select(this).attr("COVID");
+		let c = 1;
+		if(p > 5)
+		{
+			c = 2;
+		}
+		if( p > 10)
+		{
+			c = 3;
+		}
+		if( p > 25)
+		{
+			c = 4;
+		}
+		if( p > 50)
+		{
+			c = 5;
+		}
+		return c;
+	});
+}	    
 	    
 	  
 	        
