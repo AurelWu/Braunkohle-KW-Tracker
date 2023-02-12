@@ -59,7 +59,7 @@ Promise.all([worldmap]).then(function(values){
 	.on("mouseover", function() {
 	    	let friendlyName = d3.select(this).attr("name");
 		let AGS = d3.select(this).attr("AGS");
-	    	let pop = d3.select(this).attr("destatis.population");
+	    	let pop = d3.select(this).attr("destatis['population']");
 		let regionInfo = friendlyName + "| " + AGS + "| " + pop;
 	    	
 		d3.select("#p1").style("color", "green");
