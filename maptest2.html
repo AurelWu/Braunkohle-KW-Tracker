@@ -44,7 +44,12 @@ var pathDict = {};
 //var cities = d3.csv("cities.csv");
 	    	    
 Promise.all([worldmap,inputCSV]).then(function(values){    
-    parsedCSV = values[1];	
+    parsedCSV = values[1];
+    for (var k in parsedCSV) 
+    {
+	    console.log(parsedCSV[k]);
+	    dictCSV[parsedCSV[k].AGS] = parsedCSV[k].COVID;
+    }	
  // draw map
     
 	
