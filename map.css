@@ -48,3 +48,39 @@
 	stroke: #e0cabc;
 	stroke-width: 0.75;
 }
+
+[category="-1"] {
+	fill : #FFFFFF;
+	stroke: #e0cabc;
+	stroke-width: 0.5;
+}
+
+[category="1"] {
+	fill : #d7191c;
+	stroke: #e0cabc;
+	stroke-width: 0.5;
+}
+
+[category="2"] {
+	fill : #fdae61;
+	stroke: #e0cabc;
+	stroke-width: 0.5;
+}
+
+[category="3"] {
+	fill : #ffffbf;
+	stroke: #e0cabc;
+	stroke-width: 0.5;
+}
+
+[category="4"] {
+	fill : #abd9e9;
+	stroke: #e0cabc;
+	stroke-width: 0.5;
+}
+
+[category="5"] {
+	fill : #2c7bb6;
+	stroke: #e0cabc;
+	stroke-width: 0.5;
+}
