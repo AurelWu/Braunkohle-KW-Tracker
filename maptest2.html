@@ -26,7 +26,7 @@
 var worldmap = d3.json("landkreise_simplify200.geojson");
 var parsedCSV = null;
 var dictCSV = {};	    
-var inputCSV = await d3.csv("test.csv").then(function(data)
+var inputCSV = d3.csv("test.csv").then(function(data)
     { parsedCSV = data;    
     });
 	    
