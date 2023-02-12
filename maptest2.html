@@ -24,11 +24,13 @@
 
   // load data  
 var worldmap = d3.json("landkreise_simplify200.geojson");
-let testData = d3.csv(test.csv", function(d) {
+let testData = d3.csv("test.csv", function(d) {
   return {
-    AGS: d.AGS,
-    COVID: d.COVID    
-  });
+    AGS: d.ags,
+    COVID: d.COVID
+  };
+}, function(error, rows) {
+  console.log(rows);
 });
 var pathDict = {};	    
 
