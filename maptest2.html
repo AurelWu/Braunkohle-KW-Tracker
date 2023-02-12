@@ -36,7 +36,7 @@ Promise.all([worldmap]).then(function(values){
 	.attr("name", function (d) {
         return d.properties["GEN"];
     	})
-	.attr("AGS, function (d) {
+	.attr("AGS", function (d) {
         return d.properties["AGS"];
     	})
         .attr("d", path)
