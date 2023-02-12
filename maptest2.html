@@ -52,7 +52,8 @@ Promise.all([worldmap]).then(function(values){
     	})
 	.attr("COVID", function (d) {
 	    	
-        	return parsedCSV[d.properties["AGS"]]["COVID"];
+	    	let k = parsedCSV[d.properties["AGS"];
+        	return k;
     	})
 	
 	.attr("population", function (d) {
