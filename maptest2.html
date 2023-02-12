@@ -41,6 +41,8 @@ Promise.all([worldmap]).then(function(values){
 	{
 		dictCSV[element.AGS] = element.COVID;
   		console.log(element);
+		console.log(element.AGS);
+		console.log(element.COVID);
 	}	
 	
     svg.selectAll("path")
