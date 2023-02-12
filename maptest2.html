@@ -29,17 +29,7 @@ var dictCSV = {};
 var inputCSV = d3.csv("test.csv").then(function(data)
     { parsedCSV = data;    
     });
-
-console.log(parsedCSV);	    
-	    
-for (var n of parsedCSV) {	
-  console.log(n);
-  let k = n.AGS;
-  let v = n.COVID;
-  dictCSV[k] = v;
-}
-	    
-	    
+	    	    
 var pathDict = {};	    
 
 //var cities = d3.csv("cities.csv");
@@ -62,7 +52,7 @@ Promise.all([worldmap]).then(function(values){
     	})
 	.attr("COVID", function (d) {
 	    	
-	    	let k = dictCSV[d.properties["AGS"]];
+	    	let k = parsedCSV[d.properties["AGS"]];
         	//return k;
     	})
 	
