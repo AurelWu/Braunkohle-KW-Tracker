@@ -58,9 +58,9 @@ Promise.all([worldmap]).then(function(values){
 
 function AssignRandomValues()
 {
-	let rnd = getRndIntegerIncl(1,5);
+	//let rnd = getRndIntegerIncl(1,5);
 	svg.selectAll("path")
-	.attr("category", rnd);
+	.attr("category", getRndIntegerIncl(1,5));
 };
 	    
 function getRndIntegerIncl(min, max) 
