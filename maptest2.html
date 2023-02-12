@@ -27,11 +27,7 @@ var worldmap = d3.json("landkreise_simplify200.geojson");
 var parsedCSV = null;
 var dictCSV = {};	    
 var inputCSV = d3.csv("test.csv").then(function(data)
-    { parsedCSV = data;
-     return{
-     	dictCSV[data.AGS] = data.COVID;
-     };
-     
+    { parsedCSV = data;    
     });
 
 	    
