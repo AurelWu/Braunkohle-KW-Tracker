@@ -36,6 +36,12 @@ var pathDict = {};
 	    	    
 Promise.all([worldmap]).then(function(values){    
  // draw map
+	
+	for (var element of parsedCSV) 
+	{
+  		console.log(element);
+	}	
+	
     svg.selectAll("path")
         .data(values[0].features)
         .enter()
