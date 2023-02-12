@@ -31,7 +31,11 @@ var inputCSV = d3.csv("test.csv");
 Promise.resolve(inputCSV).then(function(v)
 {	
 	console.log(v);
-	dictCSV[v.AGS] = v.COVID;
+	for (var k in v) 
+	{
+  		console.log(k);
+		dictCSV[k.AGS] = k.COVID;
+	}	
 });
 	    
 var pathDict = {};	    
