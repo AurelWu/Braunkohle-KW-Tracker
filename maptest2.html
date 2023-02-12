@@ -24,7 +24,11 @@
 
   // load data  
 var worldmap = d3.json("landkreise_simplify200.geojson");
-var testData = d3.csv.parse("test.csv");
+let testData = null;
+d3.csv("testData.csv",function(data)
+{
+    testData = data; 
+});
 var pathDict = {};	    
 
 //var cities = d3.csv("cities.csv");
