@@ -12,7 +12,7 @@
     <button onclick="AssignRandomValues()">Assign Random Values</button>
     <button onclick="ShowPopulation()">show Population</button>
     <button onclick="ShowCovid()">show Covid ITS</button>
-    <button onclick="ShowWKAAnzahl()">show Covid ITS</button>
+    <button onclick="ShowWKAAnzahl()">show Anzahl</button>
     <p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
@@ -106,7 +106,8 @@ Promise.all([worldmap,inputCSV,inputWKAAnzahl]).then(function(values){
 	    	let pop = d3.select(this).attr("population");
 		let cat = d3.select(this).attr("category");
 	    	let cov = d3.select(this).attr("COVID");
-		let regionInfo = friendlyName + " | " + AGS + " | " + pop + " | " + cat + " | " + cov;
+	    	let wka = d3.select(this).attr("WKAAnzahl");
+		let regionInfo = friendlyName + " | " + AGS + " | " + pop + " | " + cat + " | " + cov + " | " + wka;
 	    	
 		d3.select("#p1").style("color", "green");
 	    	d3.select("#p1").html(regionInfo);
