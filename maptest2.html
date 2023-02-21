@@ -12,6 +12,7 @@
     <button onclick="AssignRandomValues()">Assign Random Values</button>
     <button onclick="ShowPopulation()">show Population</button>
     <button onclick="ShowCovid()">show Covid ITS</button>
+    <button onclick="ShowWKAAnzahl()">show Covid ITS</button>
     <p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
@@ -26,8 +27,11 @@
   // load data  
 var worldmap = d3.json("landkreise_simplify200.geojson");
 var parsedCSV = null;
+var parsedWKAAnlagen = null;
 var dictCSV = {};	    
+var dictWKAAnzahl = {};
 var inputCSV = d3.dsv(";","https://rwetoolbucket.s3.eu-central-1.amazonaws.com/S3test.csv");
+var inputWKAAnzahl = d3.dsv(";","WKAAnzahl.csv");
 	   
 //Promise.resolve(inputCSV).then(function(v)
 //{	
@@ -43,13 +47,20 @@ var pathDict = {};
 
 //var cities = d3.csv("cities.csv");
 	    	    
-Promise.all([worldmap,inputCSV]).then(function(values){    
+Promise.all([worldmap,inputCSV,inputWKAAnzahl]).then(function(values){    
     parsedCSV = values[1];
+    parsedWKAAnlagen = values[2];
     for (var k in parsedCSV) 
     {
-	    console.log(parsedCSV[k]);
+	    //console.log(parsedCSV[k]);
 	    dictCSV[parsedCSV[k].AGS] = parsedCSV[k].COVID;
     }	
+    for (var k in parsedWKAAnlagen) 
+    {
+	    //console.log(parsedWKAAnlagen[k]);
+	    dictWKAAnzahl[parsedWKAAnlagen[k].AGS] = parsedWKAAnlagen[k].WindAnzahl;
+    }		
+	
  // draw map
     
 	
@@ -69,7 +80,10 @@ Promise.all([worldmap,inputCSV]).then(function(values){
     	})
 	.attr("COVID", function (d) {	    	
 	    	return dictCSV[d.properties["AGS"]];        	
-    	})	
+    	})
+	.attr("WKAAnzahl", function (d) {	    	
+	    	return dictWKAAnzahl[d.properties["AGS"]];        	
+    	})
 	.attr("population", function (d) {
         	return d.properties["destatis"]["population"];
     	})
@@ -157,7 +171,33 @@ function ShowCovid()
 		}
 		return c;
 	});
-}	    
+}
+	 
+function ShowWKAAnzahl()
+{	
+	svg.selectAll("path")
+	.attr("category", function() {
+		let p = d3.select(this).attr("WKAAnzahl");
+		let c = 1;
+		if(p > 5)
+		{
+			c = 2;
+		}
+		if( p > 25)
+		{
+			c = 3;
+		}
+		if( p > 125)
+		{
+			c = 4;
+		}
+		if( p > 500)
+		{
+			c = 5;
+		}
+		return c;
+	});
+}
 	    
 	  
 	        
