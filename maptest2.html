@@ -120,7 +120,8 @@ Promise.all([worldmap,inputCSV,inputWKAAnzahl, inputPVLeistung]).then(function(v
 		let cat = d3.select(this).attr("category");
 	    	let cov = d3.select(this).attr("COVID");
 	    	let wka = d3.select(this).attr("WKAAnzahl");
-		let regionInfo = friendlyName + " | " + AGS + " | " + pop + " | " + cat + " | " + cov + " | " + wka;
+	    	let pvL = d3.select(this).attr("PVLeistung");
+		let regionInfo = friendlyName + " | " + AGS + " | " + pop + " | " + cat + " | " + cov + " | " + wka + " | " + pvL/1000;
 	    	
 		d3.select("#p1").style("color", "green");
 	    	d3.select("#p1").html(regionInfo);
