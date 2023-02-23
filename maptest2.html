@@ -14,6 +14,7 @@
     <button onclick="ShowCovid()">show Covid ITS</button>
     <button onclick="ShowWKAAnzahl()">show Anzahl</button>
     <button onclick="ShowPVLeistung()">show Anzahl2</button>
+    <button onclick="ShowPVLeistungArea()">show Anzahl3</button>
     <p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
@@ -30,12 +31,15 @@ var worldmap = d3.json("landkreise_simplify200.geojson");
 var parsedCSV = null;
 var parsedWKAAnlagen = null;
 var parsedPVLeistung = null;
+var parsedPVLeistungArea = null;
 var dictCSV = {};	    
 var dictWKAAnzahl = {};
 var dictPVLeistung = {};
+var dictPVLeistungArea = {};
 var inputCSV = d3.dsv(";","https://rwetoolbucket.s3.eu-central-1.amazonaws.com/S3test.csv");
 var inputWKAAnzahl = d3.dsv(";","WKAAnzahl.csv");
 var inputPVLeistung = d3.dsv(";","PVLeistung.csv");
+var inputPVLeistungArea = d3.dsv(";","PVLeistungArea.csv");
 	   
 //Promise.resolve(inputCSV).then(function(v)
 //{	
@@ -51,10 +55,11 @@ var pathDict = {};
 
 //var cities = d3.csv("cities.csv");
 	    	    
-Promise.all([worldmap,inputCSV,inputWKAAnzahl, inputPVLeistung]).then(function(values){    
+Promise.all([worldmap,inputCSV,inputWKAAnzahl, inputPVLeistung, inputPVLeistungArea]).then(function(values){    
     parsedCSV = values[1];
     parsedWKAAnlagen = values[2];
     parsedPVLeistung = values[3];
+    parsedPVLeistungArea = values[4];
     for (var k in parsedCSV) 
     {
 	    //console.log(parsedCSV[k]);
@@ -69,6 +74,11 @@ Promise.all([worldmap,inputCSV,inputWKAAnzahl, inputPVLeistung]).then(function(v
     for(var k in parsedPVLeistung)
     {
 	 dictPVLeistung[parsedPVLeistung[k].AGS] = parsedPVLeistung[k].LeistungPV;   
+    }
+	
+    for(var k in parsedPVLeistungArea)
+    {
+	 dictPVLeistungArea[parsedPVLeistungArea[k].AGS] = parsedPVLeistungArea[k].LeistungPV;   
     }
 	
  // draw map
@@ -96,6 +106,9 @@ Promise.all([worldmap,inputCSV,inputWKAAnzahl, inputPVLeistung]).then(function(v
     	})
 	.attr("PVLeistung", function (d) {	    	
 	    	return dictPVLeistung[d.properties["AGS"]];        	
+    	})
+	.attr("PVLeistungArea", function (d) {	    	
+	    	return dictPVLeistungArea[d.properties["AGS"]];        	
     	})
 	.attr("population", function (d) {
         	return d.properties["destatis"]["population"];
@@ -233,6 +246,32 @@ function ShowPVLeistung()
 			c = 4;
 		}
 		if( p > 1000000) //1000 MW
+		{
+			c = 5;
+		}
+		return c;
+	});
+}	
+	    
+function ShowPVLeistungArea()
+{	
+	svg.selectAll("path")
+	.attr("category", function() {
+		let p = d3.select(this).attr("PVLeistungArea");
+		let c = 1;
+		if( p > 100) //100 MW
+		{
+			c = 2;
+		}
+		if( p > 250) //250 MW
+		{
+			c = 3;
+		}
+		if( p > 500) //500 MW
+		{
+			c = 4;
+		}
+		if( p > 1000) //1000 MW
 		{
 			c = 5;
 		}
