@@ -78,7 +78,7 @@ Promise.all([worldmap,inputCSV,inputWKAAnzahl, inputPVLeistung, inputPVLeistungA
 	
     for(var k in parsedPVLeistungArea)
     {
-	 dictPVLeistungArea[parsedPVLeistungArea[k].AGS] = parsedPVLeistungArea[k].LeistungPV;   
+	 dictPVLeistungArea[parsedPVLeistungArea[k].AGS] = parsedPVLeistungArea[k].LeistungPVByArea;   
     }
 	
  // draw map
