@@ -23,7 +23,7 @@
     var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet").style("background-color","#ffffff")
     .attr("viewBox", "0 0 " + w + " " + h)
     .classed("svg-content", true);
-    var projection = d3.geoMercator().translate([w/2, h/2]).scale(2700).center([10,51.4]);
+    var projection = d3.geoMercator().translate([w/2, h/2]).scale(2450).center([10,51.4]);
     var path = d3.geoPath().projection(projection);
 
   // load data  
