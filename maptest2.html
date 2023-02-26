@@ -341,7 +341,7 @@ function RequestDataFromAPI()
 	var gDropdown = document.getElementById("generatorTypeDropdown");
 	var g = gDropdown.value;	
 	
-	var q = `https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&gentype=${g}`;
+	var q = `https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=${g}`;
 	var resultQuery = d3.dsv(";",q);
 	Promise.resolve(resultQuery).then(function(v)
 	{	
