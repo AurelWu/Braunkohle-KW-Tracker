@@ -35,11 +35,11 @@
   </select>	
   <button onclick="RequestDataFromAPI()">Get Data</button>
   <br></br>
-  <input type="number" id="cat1Limit" name="cat1Limit" placeholder="smaller/equal than"</input>
-  <input type="number" id="cat2Limit" name="cat2Limit" placeholder="smaller/equal than"</input>
-  <input type="number" id="cat3Limit" name="cat3Limit" placeholder="smaller/equal than"</input>
-  <input type="number" id="cat4Limit" name="cat4Limit" placeholder="smaller/equal than"</input>
-  <input type="number" id="cat5Limit" name="cat5Limit" placeholder="smaller/equal than"</input>
+  <input type="number" id="cat1Limit" value=100000 name="cat1Limit" placeholder="smaller/equal than"</input>
+  <input type="number" id="cat2Limit" value=250000 name="cat2Limit" placeholder="smaller/equal than"</input>
+  <input type="number" id="cat3Limit" value=500000 name="cat3Limit" placeholder="smaller/equal than"</input>
+  <input type="number" id="cat4Limit" value=750000 name="cat4Limit" placeholder="smaller/equal than"</input>  
+  <button onclick="ShowValues()">Update Categories</button>
 	
   <p id="p1"></p>
 	
@@ -115,6 +115,7 @@ Promise.all([worldmap,inputCSV,inputWKAAnzahl, inputPVLeistung, inputPVLeistungA
         .data(values[0].features)
         .enter()
         .append("path")
+	.attr("value",0)
         .attr("class","region")
 	.attr("status", "normal")
 	.attr("category", "-1")
@@ -313,19 +314,26 @@ function ShowValue()
 	.attr("category", function() {
 		let p = d3.select(this).attr("value");
 		let c = 1;
-		if( p > 100000) //100 MW
+		
+		let cat1 = d3.select("cat1Limit").value;
+		let cat2 = d3.select("cat2Limit").value;
+		let cat3 = d3.select("cat3Limit").value;
+		let cat4 = d3.select("cat4Limit").value;
+		//cat 5 is implicit everything larger than that
+		
+		if( p > cat1) //100 MW
 		{
 			c = 2;
 		}
-		if( p > 250000) //250 MW
+		if( p > cat2) //250 MW
 		{
 			c = 3;
 		}
-		if( p > 500000) //500 MW
+		if( p > cat3) //500 MW
 		{
 			c = 4;
 		}
-		if( p > 750000) //750 MW
+		if( p > cat4) //750 MW
 		{
 			c = 5;
 		}
