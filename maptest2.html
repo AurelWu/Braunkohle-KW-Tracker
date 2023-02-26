@@ -31,6 +31,7 @@
   <select name="Indicator" id="IndicatorDropdown">
   <option value="Capacity">Capacity</option>	    
   </select>	
+  <button onclick="RequestDataFromAPI()">Get Data</button>
 	
   <!-- <p id="p1">TestText</p> -->
 	
@@ -310,8 +311,15 @@ function resetAll()
 	    
 function RequestDataFromAPI()
 {
-	// var resultQuery = d3.dsv(";","https://rwetoolbucket.s3.eu-central-1.amazonaws.com/S3test.csv");
-	// https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=pv
+	var resultQuery = d3.dsv(";","https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=pv");
+	Promise.resolve(resultQuery).then(function(v)
+	{	
+		//console.log(v);
+		for (var k in v) 
+		{
+	  		console.log(v[k].AGS);			
+		}	
+	});
 };
 	    
 </script>
