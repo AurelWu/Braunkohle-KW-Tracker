@@ -342,7 +342,7 @@ function RequestDataFromAPI()
 	var g = gDropdown.value;	
 	
 	string q = `https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&gentype=${g}`;
-	var resultQuery = d3.dsv(";",q);
+	var resultQuery = d3.dsv(";",g);
 	Promise.resolve(resultQuery).then(function(v)
 	{	
 		var dict = {};		
