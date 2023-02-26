@@ -315,10 +315,10 @@ function ShowValue()
 		let p = d3.select(this).attr("value");
 		let c = 1;
 		
-		let cat1 = d3.select("cat1Limit").value;
-		let cat2 = d3.select("cat2Limit").value;
-		let cat3 = d3.select("cat3Limit").value;
-		let cat4 = d3.select("cat4Limit").value;
+		let cat1 = d3.select("#cat1Limit").value;
+		let cat2 = d3.select("#cat2Limit").value;
+		let cat3 = d3.select("#cat3Limit").value;
+		let cat4 = d3.select("#cat4Limit").value;
 		//cat 5 is implicit everything larger than that
 		
 		if( p > cat1) //100 MW
