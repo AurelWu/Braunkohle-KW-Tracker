@@ -312,13 +312,13 @@ function ShowValue()
 {	
 	svg.selectAll("path")
 	.attr("category", function() {
-		let p = d3.select(this).attr("value");
+		let p = parseInt(d3.select(this).attr("value"));
 		let c = 1;
 		
-		let cat1 = d3.select("#cat1Limit").property("value");
-		let cat2 = d3.select("#cat2Limit").property("value");
-		let cat3 = d3.select("#cat3Limit").property("value");
-		let cat4 = d3.select("#cat4Limit").property("value");
+		let cat1 = parseInt(d3.select("#cat1Limit").property("value"));
+		let cat2 = parseInt(d3.select("#cat2Limit").property("value"));
+		let cat3 = parseInt(d3.select("#cat3Limit").property("value"));
+		let cat4 = parseInt(d3.select("#cat4Limit").property("value"));
 		//cat 5 is implicit everything larger than that
 		
 		if( p > cat1) //100 MW
