@@ -1,1 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>mapTest</title>
+<script type="text/javascript" src="https://d3js.org/d3.v5.min.js"></script>
+<link rel="stylesheet" type="text/css" href="map.css">
+<style></style>
+</head>	
+<body>
+	
+  <select name="generatorType" id="generatorTypeDropdown">
+  <option value="PV">PV</option>
+  <option value="Wind">Wind</option>  
+  </select>
+	
+  <select name="subcategory GeneratorType" id="subCategorygeneratorTypeDropdown">
+  <option value="None">None</option>	  
+  <option value="Offshore">Offshore</option>
+  <option value="Onshore">Onshore</option>  
+  <option value="Rooftop">Rooftop</option>  
+  <option value="Utility">Utility</option>  
+  </select>	
+	
+  <select name="Indicator" id="IndicatorDropdown">
+  <option value="Capacity">Capacity</option>	    
+  </select>	
+  <button onclick="RequestDataFromAPI()">Get Data</button>
+  <br></br>
+  <input type="number" id="cat1Limit" value=100000 name="cat1Limit" placeholder="smaller/equal than"</input>
+  <input type="number" id="cat2Limit" value=250000 name="cat2Limit" placeholder="smaller/equal than"</input>
+  <input type="number" id="cat3Limit" value=500000 name="cat3Limit" placeholder="smaller/equal than"</input>
+  <input type="number" id="cat4Limit" value=750000 name="cat4Limit" placeholder="smaller/equal than"</input>  
+  <button onclick="ShowValue()">Update Categories</button>
+	
+  <p id="p1"></p>
+	
+    <div id="container" class="svg-container"></div>
+    <script type="text/javascript">
+    var w = 800;
+    var h = 550;
+    var svg = d3.select("div#container").append("svg").attr("preserveAspectRatio", "xMinYMin meet").style("background-color","#ffffff")
+    .attr("viewBox", "0 0 " + w + " " + h)
+    .classed("svg-content", true);
+    var projection = d3.geoMercator().translate([w/2, h/2]).scale(2450).center([10,51.4]);
+    var path = d3.geoPath().projection(projection);
+
+  // load data  
+var worldmap = d3.json("landkreise_simplify200.geojson");
+	   	    
+    
+
+	    	    
+Promise.all([worldmap]).then(function(values){    
+	
+ // draw map
+    
+	
+    svg.selectAll("path")
+        .data(values[0].features)
+        .enter()
+        .append("path")
+	.attr("value",0)
+        .attr("class","region")
+	.attr("status", "normal")
+	.attr("category", "-1")
+	.attr("name", function (d) {
+        	return d.properties["GEN"];
+    	})
+	.attr("AGS", function (d) {
+        	return d.properties["AGS"];
+    	})
+	.attr("population", function (d) {
+        	return d.properties["destatis"]["population"];
+    	})
+        .attr("d", path)
+	.on("click", function() {        	
+		let curVal = d3.select(this).attr("status");
+	    	if(curVal !== "clicked") 
+		{
+			curVal = "clicked";
+		}
+	    	else
+		{
+			curVal = "normal";
+		}
+	    	d3.select(this).attr("status", curVal);
+    		})
+	.on("mouseover", function() {
+	    	let friendlyName = d3.select(this).attr("name");
+		let AGS = d3.select(this).attr("AGS");
+	    	let pop = d3.select(this).attr("population");
+		let cat = d3.select(this).attr("category");
+
+		let regionInfo = friendlyName + " | " + AGS + " | " + pop + " | " + cat ;
+	    	
+		d3.select("#p1").style("color", "green");
+	    	d3.select("#p1").html(regionInfo);
+		});
+    });
+	    
+function ShowValue()
+{	
+	svg.selectAll("path")
+	.attr("category", function() {
+		let p = parseInt(d3.select(this).attr("value"));
+		let c = 1;
+		
+		let cat1 = parseInt(d3.select("#cat1Limit").property("value"));
+		let cat2 = parseInt(d3.select("#cat2Limit").property("value"));
+		let cat3 = parseInt(d3.select("#cat3Limit").property("value"));
+		let cat4 = parseInt(d3.select("#cat4Limit").property("value"));
+		//cat 5 is implicit everything larger than that
+		
+		if( p > cat1) //100 MW
+		{
+			c = 2;
+		}
+		if( p > cat2) //250 MW
+		{
+			c = 3;
+		}
+		if( p > cat3) //500 MW
+		{
+			c = 4;
+		}
+		if( p > cat4) //750 MW
+		{
+			c = 5;
+		}
+		return c;
+	});
+}	    
+	    	 	        
+function resetAll()
+{
+	svg.selectAll("path")
+	.attr("status", "normal")
+	.attr("category", null);	
+	d3.select("#p1").html("TestText");
+};
+	    
+function RequestDataFromAPI()
+{	
+	var gDropdown = document.getElementById("generatorTypeDropdown");
+	var subTypeDropdown = document.getElementById("subCategorygeneratorTypeDropdown");
+	var g = gDropdown.value;
+	var subType = subTypeDropdown.value;
+	
+	var q = `https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=${g}`;
+	
+	if(subType != "None")
+	{
+		q+=`&genSubCat=${subType}`;
+	}	
+	var resultQuery = d3.dsv(";",q);
+	Promise.resolve(resultQuery).then(function(v)
+	{	
+		var dict = {};		
+		//console.log(v);
+		for (var k in v) 
+		{
+	  		dictCSV[v[k].Key] = v[k].Value;	
+		}	
+		
+		svg.selectAll("path")
+		.attr("value", function(d) {
+		return dictCSV[d.properties["AGS"]];     
+		});
+		
+		ShowValue();
+	});
+	
+};
+	    
+</script>
+</body>
+</html>
 
