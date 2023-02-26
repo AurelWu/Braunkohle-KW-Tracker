@@ -297,7 +297,34 @@ function ShowPVLeistungArea()
 		}
 		return c;
 	});
+}	
+	    
+function ShowValue()
+{	
+	svg.selectAll("path")
+	.attr("category", function() {
+		let p = d3.select(this).attr("value");
+		let c = 1;
+		if( p > 100000) //100 MW
+		{
+			c = 2;
+		}
+		if( p > 250000) //250 MW
+		{
+			c = 3;
+		}
+		if( p > 500000) //500 MW
+		{
+			c = 4;
+		}
+		if( p > 750000) //1000 MW
+		{
+			c = 5;
+		}
+		return c;
+	});
 }	    
+
 	    
 	  
 	        
@@ -314,12 +341,19 @@ function RequestDataFromAPI()
 	var resultQuery = d3.dsv(";","https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=pv");
 	Promise.resolve(resultQuery).then(function(v)
 	{	
+		var dict = {};		
 		//console.log(v);
 		for (var k in v) 
 		{
-	  		console.log(v[k].Value);			
+	  		dictCSV[v[k].Key] = v[k].Value;	
 		}	
+		
+		svg.selectAll("path")
+		.attr("value", function(d) {
+		return dictCSV[d.properties["AGS"]];     
+		});
 	});
+	ShowValue();
 };
 	    
 </script>
