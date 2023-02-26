@@ -19,7 +19,7 @@
 	
   <select name="generatorType" id="generatorTypeDropdown">
   <option value="PV">PV</option>
-  <option value="WKA">Wind</option>  
+  <option value="Wind">Wind</option>  
   </select>
 	
   <select name="subcategory GeneratorType" id="subCategorygeneratorTypeDropdown">
@@ -337,8 +337,12 @@ function resetAll()
 };
 	    
 function RequestDataFromAPI()
-{
-	var resultQuery = d3.dsv(";","https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=pv");
+{	
+	var gDropdown = document.getElementById("generatorTypeDropdown");
+	var g = gDropdown.value;	
+	
+	string q = `https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&gentype=${g}`;
+	var resultQuery = d3.dsv(";",q);
 	Promise.resolve(resultQuery).then(function(v)
 	{	
 		var dict = {};		
