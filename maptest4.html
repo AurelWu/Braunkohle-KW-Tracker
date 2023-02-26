@@ -160,12 +160,12 @@ function RequestDataFromAPI()
 		//console.log(v);
 		for (var k in v) 
 		{
-	  		dictCSV[v[k].Key] = v[k].Value;	
+	  		dict[v[k].Key] = v[k].Value;	
 		}	
 		
 		svg.selectAll("path")
 		.attr("value", function(d) {
-		return dictCSV[d.properties["AGS"]];     
+		return dict[d.properties["AGS"]];     
 		});
 		
 		ShowValue();
