@@ -15,7 +15,24 @@
     <button onclick="ShowWKAAnzahl()">show Anzahl</button>
     <button onclick="ShowPVLeistung()">show Anzahl2</button>
     <button onclick="ShowPVLeistungArea()">show Anzahl3</button>
-    <p id="p1">TestText</p>
+    <br></br>
+	
+  <select name="generatorType" id="generatorTypeDropdown">
+  <option value="PV">PV</option>
+  <option value="Wind">Wind</option>  
+  </select>
+	
+  <select name="subcategory GeneratorType" id="subCategorygeneratorTypeDropdown">
+  <option value="">None</option>	  
+  <option value="Offshore">Offshore</option>
+  <option value="Onshore">Onshore</option>  
+  </select>	
+	
+  <select name="Indicator" id="IndicatorDropdown">
+  <option value="Capacity">Capacity</option>	    
+  </select>	
+	
+    //<p id="p1">TestText</p>
     <div id="container" class="svg-container"></div>
     <script type="text/javascript">
     var w = 800;
