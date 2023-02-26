@@ -350,9 +350,7 @@ function RequestDataFromAPI()
 	if(subType != "None")
 	{
 		q+=`&${subType}`;
-	}
-	
-	if(
+	}	
 	var resultQuery = d3.dsv(";",q);
 	Promise.resolve(resultQuery).then(function(v)
 	{	
