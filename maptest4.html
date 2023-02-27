@@ -150,11 +150,14 @@ function resetAll()
 function RequestDataFromAPI()
 {	
 	var gDropdown = document.getElementById("generatorTypeDropdown");
+	var basisDropdown = document.getElementById("ViewByDropdown");
 	var subTypeDropdown = document.getElementById("subCategorygeneratorTypeDropdown");
 	var g = gDropdown.value;
 	var subType = subTypeDropdown.value;
+	var basis = basisDropdown.value;
 	
-	var q = `https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=${g}`;
+	
+	var q = `https://ka6auzqlk2.execute-api.eu-central-1.amazonaws.com/default/MarktstammdatenAPIGateway?indicator=capacity&genType=${g}&basis=${basis}`;
 	
 	if(subType != "None")
 	{
