@@ -94,7 +94,7 @@ function createChart() {
             const chartCanvas = document.getElementById('languageChart');
 
             // Set the height of the chart canvas
-            chartCanvas.height = 400; // Set the desired height in pixels
+            chartCanvas.height = 1200; // Set the desired height in pixels
 
             const ctx = chartCanvas.getContext('2d');
             new Chart(ctx, {
