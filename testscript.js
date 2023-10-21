@@ -10,29 +10,11 @@ function createChart() {
             // Create an object to track the post counts for each language
             const languageCounts = {};
 
-            // Define the interval duration in milliseconds (15 minutes)
-            const intervalDuration = 15 * 60 * 1000;
-
             jsonObjects.forEach((jsonObject) => {
                 const data = JSON.parse(jsonObject);
-                const timestamp = new Date(data.timestamp).getTime();
-
-                // Calculate the start of the 15-minute interval
-                const intervalStart = Math.floor(timestamp / intervalDuration) * intervalDuration;
-
                 for (const language in data.languages) {
                     const count = data.languages[language] || 0;
-
-                    // Create a key for the language and interval
-                    const key = `${language}-${intervalStart}`;
-
-                    // Initialize the count for this key
-                    if (!languageCounts[key]) {
-                        languageCounts[key] = 0;
-                    }
-
-                    // Add the count for this language and interval
-                    languageCounts[key] += count;
+                    languageCounts[language] = (languageCounts[language] || 0) + count;
                 }
             });
 
@@ -54,37 +36,25 @@ function createChart() {
 
             jsonObjects.forEach((jsonObject) => {
                 const data = JSON.parse(jsonObject);
-                const timestamp = new Date(data.timestamp).getTime();
-
-                // Calculate the start of the 15-minute interval
-                const intervalStart = Math.floor(timestamp / intervalDuration) * intervalDuration;
-
-                labels.push(new Date(intervalStart).toISOString());
+                labels.push(data.timestamp);
 
                 for (const language of topLanguages) {
-                    const [languageName, intervalStart] = language.split('-');
-                    if (!datasets[languageName]) {
-                        datasets[languageName] = {
-                            label: languageName,
+                    if (!datasets[language]) {
+                        datasets[language] = {
+                            label: language,
                             data: [],
                             fill: false,
                             borderColor: getRandomColor(),
                         };
                     }
-
-                    // Find the count for this language and interval
-                    const key = `${languageName}-${intervalStart}`;
-                    datasets[languageName].data.push(languageCounts[key] || 0);
+                    datasets[language].data.push(data.languages[language] || 0);
                 }
 
                 // Group the post counts for other languages
-                const otherCount = otherLanguages.reduce((total, lang) => {
-                    const [languageName, intervalStart] = lang.split('-');
-                    if (intervalStart === intervalStart) {
-                        return total + (languageCounts[lang] || 0);
-                    }
-                    return total;
-                }, 0);
+                const otherCount = otherLanguages.reduce(
+                    (total, lang) => total + (data.languages[lang] || 0),
+                    0
+                );
 
                 if (!datasets.Other) {
                     datasets.Other = {
@@ -120,10 +90,7 @@ function createChart() {
                 },
             };
 
-            // Get the chart canvas element
             const chartCanvas = document.getElementById('languageChart');
-
-            // Set the height of the chart canvas
 
             const ctx = chartCanvas.getContext('2d');
             new Chart(ctx, {
