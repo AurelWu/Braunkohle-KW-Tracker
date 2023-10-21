@@ -39,7 +39,7 @@ function createChart() {
             new Chartist.Line('.ct-chart', chartData, chartOptions);
         })
         .catch((error) => {
-            console.error('Error fetching data: ', error);
+            console.error('Error fetching data: ', error)
         });
 }
 
