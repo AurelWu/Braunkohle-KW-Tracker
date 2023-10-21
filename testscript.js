@@ -51,6 +51,13 @@ function createChart() {
                 },
             };
 
+            // Get the chart canvas element
+            const chartCanvas = document.getElementById('languageChart');
+
+            // Set the height of the chart canvas
+            chartCanvas.height = 800; // Set the desired height in pixels
+
+
             const ctx = document.getElementById('languageChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
