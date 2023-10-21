@@ -18,12 +18,19 @@ function createChart() {
                 }
             });
 
-            // Sort the languages by post count and select the top 5
-            const topLanguages = Object.keys(languageCounts)
-                .sort((a, b) => languageCounts[b] - languageCounts[a])
-                .slice(0, 5);
+            // Sort the languages by post count
+            const sortedLanguages = Object.keys(languageCounts).sort(
+                (a, b) => languageCounts[b] - languageCounts[a]
+            );
 
-            // Process and aggregate the data for the top 5 languages
+            // Define the number of top languages to display
+            const topLanguageCount = 5;
+
+            // Separate the top N languages and group the rest as "Other"
+            const topLanguages = sortedLanguages.slice(0, topLanguageCount);
+            const otherLanguages = sortedLanguages.slice(topLanguageCount);
+
+            // Process and aggregate the data for the top languages and "Other"
             const labels = [];
             const datasets = {};
 
@@ -42,6 +49,22 @@ function createChart() {
                     }
                     datasets[language].data.push(data.languages[language] || 0);
                 }
+
+                // Group the post counts for other languages
+                const otherCount = otherLanguages.reduce(
+                    (total, lang) => total + (data.languages[lang] || 0),
+                    0
+                );
+
+                if (!datasets.Other) {
+                    datasets.Other = {
+                        label: 'Other',
+                        data: [],
+                        fill: false,
+                        borderColor: getRandomColor(),
+                    };
+                }
+                datasets.Other.data.push(otherCount);
             });
 
             const chartData = {
@@ -71,8 +94,7 @@ function createChart() {
             const chartCanvas = document.getElementById('languageChart');
 
             // Set the height of the chart canvas
-            chartCanvas.height = 50; // Set the desired height in pixels
-            chartCanvas.length = 80;
+            chartCanvas.height = 400; // Set the desired height in pixels
 
             const ctx = chartCanvas.getContext('2d');
             new Chart(ctx, {
