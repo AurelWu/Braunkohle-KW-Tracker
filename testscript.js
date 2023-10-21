@@ -90,6 +90,8 @@ function createChart() {
                 },
             };
 
+            const chartCanvas = document.getElementById('languageChart');
+
             const ctx = chartCanvas.getContext('2d');
             new Chart(ctx, {
                 type: 'line',
