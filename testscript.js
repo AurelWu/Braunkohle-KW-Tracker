@@ -7,7 +7,23 @@ function createChart() {
             // Split the text into individual JSON objects
             const jsonObjects = dataText.trim().split('\n');
 
-            // Process and aggregate the data
+            // Create an object to track the post counts for each language
+            const languageCounts = {};
+
+            jsonObjects.forEach((jsonObject) => {
+                const data = JSON.parse(jsonObject);
+                for (const language in data.languages) {
+                    const count = data.languages[language] || 0;
+                    languageCounts[language] = (languageCounts[language] || 0) + count;
+                }
+            });
+
+            // Sort the languages by post count and select the top 5
+            const topLanguages = Object.keys(languageCounts)
+                .sort((a, b) => languageCounts[b] - languageCounts[a])
+                .slice(0, 5);
+
+            // Process and aggregate the data for the top 5 languages
             const labels = [];
             const datasets = {};
 
@@ -15,7 +31,7 @@ function createChart() {
                 const data = JSON.parse(jsonObject);
                 labels.push(data.timestamp);
 
-                for (const language in data.languages) {
+                for (const language of topLanguages) {
                     if (!datasets[language]) {
                         datasets[language] = {
                             label: language,
@@ -55,10 +71,9 @@ function createChart() {
             const chartCanvas = document.getElementById('languageChart');
 
             // Set the height of the chart canvas
-            chartCanvas.height = 800; // Set the desired height in pixels
+            chartCanvas.height = 700; // Set the desired height in pixels
 
-
-            const ctx = document.getElementById('languageChart').getContext('2d');
+            const ctx = chartCanvas.getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: chartData,
