@@ -7,21 +7,32 @@ function drawChart() {
 
     // Load the JSON data from the S3 bucket
     fetch(s3DataUrl)
-        .then(response => response.json())
-        .then(data => {
-            const jsonData = [['id','Timestamp', 'language_code' , 'Amount']].concat(data);
-            const chartData = google.visualization.arrayToDataTable(jsonData);
-
-            const options = {
-                title: 'Line Chart Example',
-                curveType: 'function',
-                legend: { position: 'bottom' }
-            };
-
-            const chart = new google.visualization.LineChart(document.getElementById('lineChart'));
-            chart.draw(chartData, options);
-        })
-        .catch(error => {
-            console.error('Error loading JSON data from S3:', error);
+    .then(response => response.json())
+    .then(data => {
+        // Group the data by language_code
+        const groupedData = {};
+        data.forEach(item => {
+            if (!groupedData[item.language_code]) {
+                groupedData[item.language_code] = [];
+            }
+            groupedData[item.language_code].push([item.timestamp, parseFloat(item.amount)]);
         });
+
+        // Create an array of series for the chart
+        const seriesData = [['Timestamp']].concat(Object.entries(groupedData).map(([languageCode, data]) => [languageCode, ...data]));
+
+        const chartData = google.visualization.arrayToDataTable(seriesData);
+
+        const options = {
+            title: 'Multi-Series Line Chart',
+            curveType: 'function',
+            legend: { position: 'bottom' }
+        };
+
+        const chart = new google.visualization.LineChart(document.getElementById('lineChart'));
+        chart.draw(chartData, options);
+    })
+    .catch(error => {
+        console.error('Error loading JSON data from S3:', error);
+    });
 }
