@@ -32,3 +32,4 @@ function processData(data) {
 
   return googleChartsData;
 }
+
