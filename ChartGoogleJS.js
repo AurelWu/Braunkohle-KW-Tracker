@@ -9,7 +9,7 @@ function drawChart() {
     fetch(s3DataUrl)
         .then(response => response.json())
         .then(data => {
-            const jsonData = [['Timestamp', 'Amount']].concat(data);
+            const jsonData = [['id','Timestamp', 'language_code' , 'Amount']].concat(data);
             const chartData = google.visualization.arrayToDataTable(jsonData);
 
             const options = {
