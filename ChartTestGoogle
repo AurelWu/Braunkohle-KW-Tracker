@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Google Charts Line Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body>
+    <div id="lineChart" style="width: 800px; height: 400px;"></div>
+    <script src="chart-script.js"></script>
+</body>
+</html>
