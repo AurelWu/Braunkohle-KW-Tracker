@@ -7,16 +7,8 @@ function drawChart() {
 
     // Load the JSON data from the S3 bucket
     fetch(s3DataUrl)
-    .then(response => response.json())
-    .then(data => {
-        // Group the data by language_code
-        const groupedData = {};
-        data.forEach(item => {
-            if (!groupedData[item.language_code]) {
-                groupedData[item.language_code] = [];
-            }
-            groupedData[item.language_code].push([item.timestamp, parseFloat(item.amount)]);
-        });
+    .then(response => response.json());
+
 
         // Create an array of series for the chart
         const seriesData = [['Timestamp']].concat(Object.entries(groupedData).map(([languageCode, data]) => [languageCode, ...data]));
